@@ -1,28 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3306
--- Tempo de geração: 16-Abr-2022 às 14:10
--- Versão do servidor: 5.7.31
--- versão do PHP: 7.3.21
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Banco de dados: `bd_autojva`
---
-
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `tb_carro`
 --
@@ -38,6 +13,24 @@ CREATE TABLE IF NOT EXISTS `tb_carro` (
   `cr_ano` int(5) NOT NULL,
   `cr_km` double(10,3) NOT NULL,
   PRIMARY KEY (`cr_codigo`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_cartacli`
+--
+
+DROP TABLE IF EXISTS `tb_cartacli`;
+CREATE TABLE IF NOT EXISTS `tb_cartacli` (
+  `ct_codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `ct_nomeCartao` varchar(50) NOT NULL,
+  `ct_nmCartao` varchar(50) NOT NULL,
+  `ct_expiracao` varchar(50) NOT NULL,
+  `ct_cvv` varchar(50) NOT NULL,
+  `tb_cliente_cd_id` int(11) NOT NULL,
+  PRIMARY KEY (`ct_codigo`),
+  KEY `fk_tb_cartaoCli_cd_cliente1_idx` (`tb_cliente_cd_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -53,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `tb_cliente` (
   `cd_sobrenome` varchar(45) NOT NULL,
   `cd_CPF` varchar(15) NOT NULL,
   PRIMARY KEY (`cd_codigo`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -69,7 +62,17 @@ CREATE TABLE IF NOT EXISTS `tb_email_cli` (
   `cd_cliente_codigo` int(11) NOT NULL,
   PRIMARY KEY (`emc_codigo`),
   KEY `fk_tb_email_cli_cd_cliente1_idx` (`cd_cliente_codigo`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_email_cli`
+--
+
+INSERT INTO `tb_email_cli` (`emc_codigo`, `cli_email`, `cli_senha`, `cd_cliente_codigo`) VALUES
+(11, 'rute@gmail.com', '123', 11),
+(10, 'joabe@gmail.com', '123', 10),
+(9, 'bezerra2004@gmail.com', '123', 9),
+(8, 'Wis123@gmail.com', '123', 8);
 
 -- --------------------------------------------------------
 
@@ -106,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `tb_endereco_cli` (
   `cd_cliente_cd_codigo` int(11) NOT NULL,
   PRIMARY KEY (`edc_codigo`),
   KEY `fk_tb_endereco_cli_cd_cliente1_idx` (`cd_cliente_cd_codigo`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
